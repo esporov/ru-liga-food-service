@@ -7,6 +7,8 @@
     <changeSet id="2023-10-15 15:00:00" author="esporov">
         <sqlFile path="v01/ddl_restaurant_service_init.sql" relativeToChangelogFile="true"/>
         <sqlFile path="v01/ddl_order_service_init.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v01/ddl_customers_service_init.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v01/ddl_couriers_service.sql" relativeToChangelogFile="true"/>
         <sqlFile path="v01/insert_data.sql" relativeToChangelogFile="true"/>
         <rollback>
             <sqlFile path="v01/rollback/rollback.sql" relativeToChangelogFile="true"/>
