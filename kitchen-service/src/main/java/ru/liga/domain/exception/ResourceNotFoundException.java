@@ -1,6 +1,6 @@
 package ru.liga.domain.exception;
 
-public class ResourceNotFoundException extends Exception {
+public class ResourceNotFoundException extends RuntimeException {
 
     public ResourceNotFoundException() {
     }
