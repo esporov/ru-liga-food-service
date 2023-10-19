@@ -5,14 +5,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.liga.domain.exception.ExceptionBody;
-import ru.liga.domain.exception.RestaurantNotFoundException;
+import ru.liga.domain.exception.IllegalStatusException;
+import ru.liga.domain.exception.ResourceNotFoundException;
 
 @RestControllerAdvice
 public class ControllerAdvice {
 
-    @ExceptionHandler(RestaurantNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionBody handleResourceNotFound(RestaurantNotFoundException e) {
-        return new ExceptionBody("Ресторан не найден");
+    public ExceptionBody handleResourceNotFound(ResourceNotFoundException e) {
+        return new ExceptionBody(e.getMessage());
+    }
+
+    @ExceptionHandler(IllegalStatusException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleIllegalStatus(IllegalStatusException e) {
+        return new ExceptionBody(e.getMessage());
     }
 }

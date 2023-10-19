@@ -1,6 +1,8 @@
 package ru.liga.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -8,59 +10,81 @@ import org.springframework.web.bind.annotation.*;
 import ru.liga.domain.restaurant.Restaurant;
 import ru.liga.domain.restaurant.RestaurantAddress;
 import ru.liga.service.RestaurantService;
+import ru.liga.web.dto.RestaurantAddressDto;
+import ru.liga.web.dto.RestaurantDto;
+import ru.liga.web.mapper.RestaurantAddressMapper;
+import ru.liga.web.mapper.RestaurantMapper;
 
 import java.util.List;
 
+@Tag(name = "Restaurant Controller")
 @RestController
-@RequestMapping("/restaurant-api/v1/")
+@RequestMapping("/restaurant-api")
+@RequiredArgsConstructor
 public class RestaurantsController {
 
     private final RestaurantService restaurantService;
+    private final RestaurantMapper restaurantMapper;
+    private final RestaurantAddressMapper restaurantAddressMapper;
 
-    @Autowired
-    public RestaurantsController(RestaurantService restaurantService) {
-        this.restaurantService = restaurantService;
-    }
-
-    @GetMapping("restaurant/{id}")
-    public Restaurant getRestaurantByRestaurantId(@PathVariable(value = "id") long id) {
-        return restaurantService.getRestaurantByRestaurantId(id);
-    }
-
-    @GetMapping("restaurant/{id}/restaurants")
-    public ResponseEntity<List<RestaurantAddress>> getAllRestaurantsByRestaurantId(@PathVariable(value = "id") long id) {
+    @Operation(summary = "Получить все рестораны.")
+    @GetMapping("/v1.0/restaurants")
+    public ResponseEntity<List<RestaurantDto>> getAllRestaurants() {
+        List<Restaurant> restaurants =restaurantService.getAllRestaurants();
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(restaurantService.getAllRestaurantsByRestaurantId(id));
+                .body(restaurantMapper.toDto(restaurants));
     }
-
-    @GetMapping("/restaurants")
-    public ResponseEntity<List<Restaurant>> getAllDistinctRestaurants() {
+    @Operation(summary = "Получить ресторан по id.")
+    @GetMapping("/v1.0/restaurant/id/{id}")
+    public ResponseEntity<RestaurantDto> getRestaurantByRestaurantId(@PathVariable(value = "id") long id) {
+        Restaurant restaurant = restaurantService.getRestaurantByRestaurantId(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(restaurantService.getAllDistinctRestaurants());
+                .body(restaurantMapper.toDto(restaurant));
     }
 
-    @PatchMapping("/restaurants/")
-    public String updateRestaurantStatusByAddressId(@RequestParam(value = "id") long id,
-                                                    @RequestParam(value = "restaurantStatus") String restaurantStatus) {
-        try {
-            restaurantService.updateRestaurantStatusByAddressId(id, restaurantStatus);
-            return "id= " + id + " restaurantStatus=" + restaurantStatus;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @Operation(summary = "Получить все адреса по id ресторана.")
+    @GetMapping("/v1.0/restaurant/id/{id}/addresses")
+    public ResponseEntity<List<RestaurantAddressDto>> getAllRestaurantAddressesByRestaurantId(
+            @PathVariable(value = "id") long id) {
+        List<RestaurantAddress> addresses = restaurantService.getAllRestaurantAddressesByRestaurantId(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(restaurantAddressMapper.toDto(addresses));
+    }
+    @Operation(summary = "Получить все адреса по названию ресторана.")
+    @GetMapping("/v1.0/restaurant/name/{name}/addresses")
+    public ResponseEntity<List<RestaurantAddressDto>> getAllRestaurantAddressesByRestaurantName(
+            @PathVariable(value = "name") String name) {
+        List<RestaurantAddress> addresses = restaurantService.getAllRestaurantAddressesByRestaurantName(name);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(restaurantAddressMapper.toDto(addresses));
     }
 
-    /*@GetMapping("/addressStatus/{restaurantStatus}")
-    public ResponseEntity<List<RestaurantAddress>> getRestaurantByRestaurantStatus(
-            @PathVariable(value = "restaurantStatus") String restaurantStatus) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(restaurantService.getRestaurantByRestaurantStatus(restaurantStatus));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
+    @Operation(summary = "Получить все адреса по id ресторана и статусу.")
+    @GetMapping("/v1.0/restaurant/addresses")
+    public ResponseEntity<List<RestaurantAddressDto>> getRestaurantAddressesByRestaurantIdAndRestaurantStatus(
+            @RequestParam("restaurantId") long restaurantId,
+            @RequestParam("status") String restaurantStatus) {
+        List<RestaurantAddress> addresses = restaurantService.getRestaurantAddressesByRestaurantIdAndRestaurantStatus(
+                restaurantId, restaurantStatus);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(restaurantAddressMapper.toDto(addresses));
+    }
+
+    @Operation(summary = "Обновить статус адреса по id ресторана.")
+    @PatchMapping("/v1.0/restaurant/address")
+    public ResponseEntity<RestaurantAddressDto> updateRestaurantAddressStatusByAddressId(
+            @RequestParam(value = "id") long id,
+            @RequestParam(value = "restaurantStatus") String restaurantStatus) {
+        RestaurantAddress address = restaurantService.updateRestaurantAddressStatusByAddressId(id, restaurantStatus);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(restaurantAddressMapper.toDto(address));
+    }
+
+
 }
