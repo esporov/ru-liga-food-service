@@ -15,10 +15,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class OrderItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "item_id")
     private Item item;
 }
