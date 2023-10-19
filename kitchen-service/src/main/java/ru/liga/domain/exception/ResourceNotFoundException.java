@@ -1,6 +1,6 @@
 package ru.liga.domain.exception;
 
-public class ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends Exception {
 
     public ResourceNotFoundException() {
     }
@@ -8,4 +8,8 @@ public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
         super(message);
     }
+
+
+
+
 }
