@@ -18,6 +18,7 @@
         <commom.version>0.0.1-SNAPSHOT</commom.version>
         <java.version>11</java.version>
         <spring.version>2.7.15</spring.version>
+        <spring-cloud-starter-openfeign.version>3.1.8</spring-cloud-starter-openfeign.version>
         <mybatis.version>3.5.6</mybatis.version>
         <lombok.version>1.18.30</lombok.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
@@ -27,6 +28,7 @@
         <swagger-annotations.version>2.2.4</swagger-annotations.version>
         <springdoc-openapi-common.version>1.6.6</springdoc-openapi-common.version>
         <springdoc-openapi-webmvc-core.version>1.6.6</springdoc-openapi-webmvc-core.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -56,6 +58,12 @@
                 <artifactId>common</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
                 <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-starter-openfeign.version}</version>
             </dependency>
 
             <dependency>
