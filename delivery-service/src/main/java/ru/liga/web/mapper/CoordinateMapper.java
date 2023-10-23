@@ -1,9 +1,11 @@
 package ru.liga.web.mapper;
 
+import domain.enitity.deliveryService.coordinate.Coordinate;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import ru.liga.domain.coordinate.Coordinate;
-import ru.liga.web.dto.CoordinateDto;
+import web.dto.delivery.CoordinateDto;
+import web.mapper.Mappable;
+
 
 @Component
 @Mapper(componentModel = "spring")
