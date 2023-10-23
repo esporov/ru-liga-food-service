@@ -3,6 +3,7 @@ package ru.liga.domain.item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.liga.domain.restaurant.Restaurant;
 
 import javax.persistence.*;
 
@@ -27,4 +28,14 @@ public class Item {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "item_status")
     private ItemStatus itemStatus;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "restaurants_menu_items",
+            inverseJoinColumns = @JoinColumn(
+                    name = "restaurant_id",
+                    referencedColumnName = "restaurant_id"),
+            joinColumns = @JoinColumn(
+                    name = "item_id",
+                    referencedColumnName = "item_id"))
+    private Restaurant restaurant;
 }

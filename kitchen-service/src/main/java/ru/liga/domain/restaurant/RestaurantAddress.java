@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -35,6 +36,16 @@ public  class RestaurantAddress {
     @Column(name = "restaurant_status")
     private RestaurantStatus restaurantStatus;
 
+    @ManyToOne
+    @JoinTable(name = "restaurants_restaurant_address",
+            inverseJoinColumns = @JoinColumn(
+                    name = "restaurant_id",
+                    referencedColumnName = "restaurant_id"),
+            joinColumns = @JoinColumn(
+                    name = "address_id",
+                    referencedColumnName = "address_id"))
+    private Restaurant restaurant;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,10 +54,11 @@ public  class RestaurantAddress {
         RestaurantAddress that = (RestaurantAddress) o;
 
         if (addressId != that.addressId) return false;
-        if (streetName != null ? !streetName.equals(that.streetName) : that.streetName != null) return false;
-        if (city != null ? !city.equals(that.city) : that.city != null) return false;
-        if (dateOfAdd != null ? !dateOfAdd.equals(that.dateOfAdd) : that.dateOfAdd != null) return false;
-        return restaurantStatus == that.restaurantStatus;
+        if (!Objects.equals(streetName, that.streetName)) return false;
+        if (!Objects.equals(city, that.city)) return false;
+        if (!Objects.equals(dateOfAdd, that.dateOfAdd)) return false;
+        if (restaurantStatus != that.restaurantStatus) return false;
+        return Objects.equals(restaurant, that.restaurant);
     }
 
     @Override
@@ -56,6 +68,7 @@ public  class RestaurantAddress {
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (dateOfAdd != null ? dateOfAdd.hashCode() : 0);
         result = 31 * result + (restaurantStatus != null ? restaurantStatus.hashCode() : 0);
+        result = 31 * result + (restaurant != null ? restaurant.hashCode() : 0);
         return result;
     }
 }
