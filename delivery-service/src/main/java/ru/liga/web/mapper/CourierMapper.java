@@ -1,10 +1,9 @@
 package ru.liga.web.mapper;
 
-import domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import web.dto.delivery.CourierDto;
-import web.mapper.Mappable;
+import ru.liga.web.dto.delivery.CourierDto;
 
 @Component
 @Mapper(componentModel = "spring")

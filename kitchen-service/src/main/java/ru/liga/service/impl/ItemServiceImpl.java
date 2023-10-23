@@ -1,7 +1,7 @@
 package ru.liga.service.impl;
 
-import domain.enitity.kitchenService.item.Item;
-import domain.exception.ResourceNotFoundException;
+import ru.liga.domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

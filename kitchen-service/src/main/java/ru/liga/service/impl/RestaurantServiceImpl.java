@@ -1,11 +1,11 @@
 package ru.liga.service.impl;
 
-import domain.enitity.kitchenService.restaurant.Restaurant;
-import domain.enitity.kitchenService.restaurant.RestaurantAddress;
-import domain.enitity.kitchenService.restaurant.RestaurantStatus;
-import domain.exception.IllegalStatusException;
-import domain.exception.ResourceNotFoundException;
-import interfaces.EnumToStringConverter;
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantStatus;
+import ru.liga.domain.exception.IllegalStatusException;
+import ru.liga.domain.exception.ResourceNotFoundException;
+import ru.liga.interfaces.EnumToStringConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

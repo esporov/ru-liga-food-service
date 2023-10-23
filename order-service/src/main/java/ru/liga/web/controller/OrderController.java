@@ -5,12 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.repository.OrderRepository;
 import ru.liga.service.OrderService;
 import ru.liga.web.mapper.OrderMapper;
-import web.dto.order.OrderDto;
-
-import java.util.List;
+import ru.liga.web.dto.order.OrderDto;
 
 @RestController
 @RequestMapping("/order-api")

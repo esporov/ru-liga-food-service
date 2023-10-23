@@ -1,7 +1,7 @@
 package ru.liga.service;
 
 
-import domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.enitity.kitchenService.item.Item;
 
 import java.math.BigDecimal;
 import java.util.List;

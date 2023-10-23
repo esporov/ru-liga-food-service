@@ -2,7 +2,7 @@ package ru.liga.service;
 
 
 
-import domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package ru.liga;
 
-import domain.enitity.deliveryService.coordinate.Coordinate;
-import domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.deliveryService.coordinate.Coordinate;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

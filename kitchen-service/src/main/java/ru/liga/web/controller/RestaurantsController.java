@@ -3,10 +3,10 @@ package ru.liga.web.controller;
 
 import ru.liga.web.mapper.RestaurantAddressMapper;
 import ru.liga.web.mapper.RestaurantMapper;
-import web.dto.kitchen.RestaurantAddressDto;
-import web.dto.kitchen.RestaurantDto;
-import domain.enitity.kitchenService.restaurant.Restaurant;
-import domain.enitity.kitchenService.restaurant.RestaurantAddress;
+import ru.liga.web.dto.kitchen.RestaurantAddressDto;
+import ru.liga.web.dto.kitchen.RestaurantDto;
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

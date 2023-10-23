@@ -1,14 +1,14 @@
 package ru.liga;
 
-import domain.enitity.customerService.customer.Customer;
-import domain.enitity.customerService.customer.CustomerAddress;
-import domain.enitity.deliveryService.coordinate.Coordinate;
-import domain.enitity.deliveryService.courier.Courier;
-import domain.enitity.kitchenService.item.Item;
-import domain.enitity.kitchenService.restaurant.Restaurant;
-import domain.enitity.kitchenService.restaurant.RestaurantAddress;
-import domain.enitity.orderService.order.Order;
-import domain.enitity.orderService.orderItem.OrderItem;
+import ru.liga.domain.enitity.customerService.customer.Customer;
+import ru.liga.domain.enitity.customerService.customer.CustomerAddress;
+import ru.liga.domain.enitity.deliveryService.coordinate.Coordinate;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
+import ru.liga.domain.enitity.orderService.order.Order;
+import ru.liga.domain.enitity.orderService.orderItem.OrderItem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

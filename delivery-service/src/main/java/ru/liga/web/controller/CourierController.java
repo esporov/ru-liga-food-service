@@ -1,6 +1,6 @@
 package ru.liga.web.controller;
 
-import domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.liga.service.CourierService;
 import ru.liga.web.mapper.CoordinateMapper;
 import ru.liga.web.mapper.CourierMapper;
-import web.dto.delivery.CourierDto;
+import ru.liga.web.dto.delivery.CourierDto;
 
 import java.util.List;
 

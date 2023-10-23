@@ -1,10 +1,9 @@
 package ru.liga.web.mapper;
 
-import domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.enitity.kitchenService.item.Item;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import web.dto.kitchen.ItemDto;
-import web.mapper.Mappable;
+import ru.liga.web.dto.kitchen.ItemDto;
 
 @Component
 @Mapper(componentModel = "spring")

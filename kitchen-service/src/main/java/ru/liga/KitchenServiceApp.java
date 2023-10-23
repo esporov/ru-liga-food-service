@@ -1,8 +1,8 @@
 package ru.liga;
 
-import domain.enitity.kitchenService.item.Item;
-import domain.enitity.kitchenService.restaurant.Restaurant;
-import domain.enitity.kitchenService.restaurant.RestaurantAddress;
+import ru.liga.domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

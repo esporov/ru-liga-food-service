@@ -1,7 +1,7 @@
 package ru.liga.repository;
 
-import domain.enitity.kitchenService.item.Item;
-import domain.exception.ResourceNotFoundException;
+import ru.liga.domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

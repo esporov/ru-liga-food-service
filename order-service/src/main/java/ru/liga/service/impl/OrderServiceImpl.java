@@ -1,8 +1,7 @@
 package ru.liga.service.impl;
 
-import domain.enitity.deliveryService.courier.CourierStatus;
-import domain.enitity.orderService.order.Order;
-import domain.exception.ResourceNotFoundException;
+import ru.liga.domain.enitity.orderService.order.Order;
+import ru.liga.domain.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

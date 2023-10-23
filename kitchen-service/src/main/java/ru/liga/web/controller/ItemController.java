@@ -1,14 +1,14 @@
 package ru.liga.web.controller;
 
 import ru.liga.web.mapper.ItemMapper;
-import domain.enitity.kitchenService.item.Item;
+import ru.liga.domain.enitity.kitchenService.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.service.ItemService;
-import web.dto.kitchen.ItemDto;
+import ru.liga.web.dto.kitchen.ItemDto;
 
 
 import java.math.BigDecimal;

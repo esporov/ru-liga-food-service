@@ -1,10 +1,9 @@
 package ru.liga.web.mapper;
 
-import domain.enitity.orderService.order.Order;
+import ru.liga.domain.enitity.orderService.order.Order;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import web.dto.order.OrderDto;
-import web.mapper.Mappable;
+import ru.liga.web.dto.order.OrderDto;
 
 @Component
 @Mapper(componentModel = "spring")

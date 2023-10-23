@@ -1,10 +1,10 @@
 package ru.liga.service.impl;
 
-import domain.enitity.deliveryService.courier.Courier;
-import domain.enitity.deliveryService.courier.CourierStatus;
-import domain.exception.IllegalStatusException;
-import domain.exception.ResourceNotFoundException;
-import interfaces.EnumToStringConverter;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.deliveryService.courier.CourierStatus;
+import ru.liga.domain.exception.IllegalStatusException;
+import ru.liga.domain.exception.ResourceNotFoundException;
+import ru.liga.interfaces.EnumToStringConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
