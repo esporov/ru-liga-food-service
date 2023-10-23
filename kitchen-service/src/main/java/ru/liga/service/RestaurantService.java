@@ -1,7 +1,8 @@
 package ru.liga.service;
 
-import ru.liga.domain.restaurant.Restaurant;
-import ru.liga.domain.restaurant.RestaurantAddress;
+
+import domain.enitity.kitchenService.restaurant.Restaurant;
+import domain.enitity.kitchenService.restaurant.RestaurantAddress;
 
 import java.util.List;
 

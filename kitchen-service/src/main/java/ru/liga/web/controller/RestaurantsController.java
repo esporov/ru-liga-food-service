@@ -1,5 +1,12 @@
 package ru.liga.web.controller;
 
+
+import ru.liga.web.mapper.RestaurantAddressMapper;
+import ru.liga.web.mapper.RestaurantMapper;
+import web.dto.kitchen.RestaurantAddressDto;
+import web.dto.kitchen.RestaurantDto;
+import domain.enitity.kitchenService.restaurant.Restaurant;
+import domain.enitity.kitchenService.restaurant.RestaurantAddress;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -7,14 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.domain.restaurant.Restaurant;
-import ru.liga.domain.restaurant.RestaurantAddress;
 import ru.liga.service.RestaurantService;
-import ru.liga.web.dto.RestaurantAddressDto;
-import ru.liga.web.dto.RestaurantDto;
-import ru.liga.web.mapper.RestaurantAddressMapper;
-import ru.liga.web.mapper.RestaurantMapper;
-
 import java.util.List;
 
 @Tag(name = "Restaurant Controller")
@@ -45,7 +45,7 @@ public class RestaurantsController {
     }
 
     @Operation(summary = "Получить все адреса по id ресторана.")
-    @GetMapping("/v1.0/restaurant/id/{id}/addresses")
+    @GetMapping("/v1.0/restaurants/restaurantId/{id}")
     public ResponseEntity<List<RestaurantAddressDto>> getAllRestaurantAddressesByRestaurantId(
             @PathVariable(value = "id") long id) {
         List<RestaurantAddress> addresses = restaurantService.getAllRestaurantAddressesByRestaurantId(id);
@@ -54,7 +54,7 @@ public class RestaurantsController {
                 .body(restaurantAddressMapper.toDto(addresses));
     }
     @Operation(summary = "Получить все адреса по названию ресторана.")
-    @GetMapping("/v1.0/restaurant/name/{name}/addresses")
+    @GetMapping("/v1.0/restaurants/restaurantName/{name}")
     public ResponseEntity<List<RestaurantAddressDto>> getAllRestaurantAddressesByRestaurantName(
             @PathVariable(value = "name") String name) {
         List<RestaurantAddress> addresses = restaurantService.getAllRestaurantAddressesByRestaurantName(name);
@@ -64,7 +64,7 @@ public class RestaurantsController {
     }
 
     @Operation(summary = "Получить все адреса по id ресторана и статусу.")
-    @GetMapping("/v1.0/restaurant/addresses")
+    @GetMapping("/v1.0/addresses")
     public ResponseEntity<List<RestaurantAddressDto>> getRestaurantAddressesByRestaurantIdAndRestaurantStatus(
             @RequestParam("restaurantId") long restaurantId,
             @RequestParam("status") String restaurantStatus) {
@@ -76,7 +76,7 @@ public class RestaurantsController {
     }
 
     @Operation(summary = "Обновить статус адреса по id ресторана.")
-    @PatchMapping("/v1.0/restaurant/address")
+    @PatchMapping("/v1.0/address")
     public ResponseEntity<RestaurantAddressDto> updateRestaurantAddressStatusByAddressId(
             @RequestParam(value = "id") long id,
             @RequestParam(value = "restaurantStatus") String restaurantStatus) {

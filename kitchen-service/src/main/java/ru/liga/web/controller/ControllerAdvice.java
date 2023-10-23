@@ -1,12 +1,12 @@
 package ru.liga.web.controller;
 
+import domain.exception.ExceptionBody;
+import domain.exception.IllegalStatusException;
+import domain.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.liga.domain.exception.ExceptionBody;
-import ru.liga.domain.exception.IllegalStatusException;
-import ru.liga.domain.exception.ResourceNotFoundException;
 
 @RestControllerAdvice
 public class ControllerAdvice {

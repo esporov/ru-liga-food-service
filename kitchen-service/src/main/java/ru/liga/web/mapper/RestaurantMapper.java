@@ -1,10 +1,11 @@
 package ru.liga.web.mapper;
 
-import lombok.extern.apachecommons.CommonsLog;
+import domain.enitity.kitchenService.restaurant.Restaurant;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import ru.liga.domain.restaurant.Restaurant;
-import ru.liga.web.dto.RestaurantDto;
+import web.dto.kitchen.RestaurantDto;
+import web.mapper.Mappable;
+
 
 @Component
 @Mapper(componentModel = "spring")

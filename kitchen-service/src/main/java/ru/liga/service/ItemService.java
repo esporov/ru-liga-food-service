@@ -1,10 +1,10 @@
 package ru.liga.service;
 
-import ru.liga.domain.item.Item;
+
+import domain.enitity.kitchenService.item.Item;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 public interface ItemService {
 

@@ -1,13 +1,13 @@
 package ru.liga.web.mapper;
 
+import domain.enitity.kitchenService.restaurant.RestaurantAddress;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
-import ru.liga.domain.item.Item;
-import ru.liga.domain.restaurant.RestaurantAddress;
-import ru.liga.web.dto.ItemDto;
-import ru.liga.web.dto.RestaurantAddressDto;
+import web.dto.kitchen.RestaurantAddressDto;
+import web.mapper.Mappable;
+
 
 @Component
 @Mapper(componentModel = "spring")
-public interface RestaurantAddressMapper extends Mappable<RestaurantAddress, RestaurantAddressDto>{
+public interface RestaurantAddressMapper extends Mappable<RestaurantAddress, RestaurantAddressDto> {
 }
