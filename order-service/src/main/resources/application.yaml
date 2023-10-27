@@ -8,3 +8,17 @@ management:
       show-details: always
 server:
   port: 8083
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/liga-db
+    username: postgres
+    password: 411712
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        default_batch_fetch_size: 50

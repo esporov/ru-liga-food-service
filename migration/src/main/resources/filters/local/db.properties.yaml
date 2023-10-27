@@ -1,8 +1,3 @@
-#username:${db_username}
-#password:${db_password}
-#driver:org.postgresql.Driver
-#url:${db_url}
-
 username:postgres
 password:411712
 driver:org.postgresql.Driver

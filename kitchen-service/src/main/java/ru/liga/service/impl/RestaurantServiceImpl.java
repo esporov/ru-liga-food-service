@@ -1,12 +1,14 @@
 package ru.liga.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantStatus;
+import ru.liga.domain.exception.IllegalStatusException;
+import ru.liga.domain.exception.ResourceNotFoundException;
+import ru.liga.interfaces.EnumToStringConverter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.liga.domain.exception.RestaurantNotFoundException;
-import ru.liga.domain.restaurant.Restaurant;
-import ru.liga.domain.restaurant.RestaurantAddress;
-import ru.liga.domain.restaurant.RestaurantStatus;
 import ru.liga.repository.RestaurantRepository;
 import ru.liga.service.RestaurantService;
 
@@ -14,65 +16,106 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class RestaurantServiceImpl implements RestaurantService {
+@RequiredArgsConstructor
+public class RestaurantServiceImpl implements RestaurantService, EnumToStringConverter {
 
     private final RestaurantRepository restaurantRepository;
 
-    @Autowired
-    public RestaurantServiceImpl(RestaurantRepository repository) {
-        this.restaurantRepository = repository;
-    }
-
     @Override
-    public Restaurant getRestaurantByRestaurantId(long id) {
-        return restaurantRepository.getRestaurantByRestaurantId(id)
-                .orElseThrow(() -> new RestaurantNotFoundException("Restaurant not found."));
-    }
-
-    @Override
-    public List<RestaurantAddress> getAllRestaurantsByRestaurantId(long id) {
-        List<RestaurantAddress> restaurants = restaurantRepository.getAllRestaurantsByRestaurantId(id);
-        if (!restaurants.isEmpty()) {
-            return restaurants;
-        } else {
-            throw new RestaurantNotFoundException("Restaurant not found.");
-        }
-    }
-
-    @Override
-    public List<Restaurant> getAllDistinctRestaurants() {
+    public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }
 
     @Override
-    public List<Restaurant> getAllRestaurantsByRestaurantName(String RestaurantName) {
-        return restaurantRepository.findAllByRestaurantName(RestaurantName);
-    }
-
-    @Override
-    public void updateRestaurantName(String restaurantName, String newRestaurantName) {
-        restaurantRepository.updateByRestaurantName(restaurantName, newRestaurantName);
-    }
-    @Override
-    @Transactional
-    public void updateRestaurantStatusByAddressId(long addressId, String restaurantStatus) {
+    public Restaurant getRestaurantByRestaurantId(long id) {
         try {
-            RestaurantStatus.valueOf(restaurantStatus);
-        } catch (IllegalArgumentException e) {
-            //TODO
+            return restaurantRepository.getRestaurantByRestaurantId(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Ресторана с id = " + id + " не существует."));
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        restaurantRepository.updateRestaurantStatusByAddressId(addressId, restaurantStatus);
+    }
+
+    @Override
+    public RestaurantAddress getRestaurantAddressByAddressId(long id) {
+        try {
+            return restaurantRepository.getRestaurantAddressByAddressId(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Адреса с id = " + id + " не существует."));
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<RestaurantAddress> getAllRestaurantAddressesByRestaurantId(long id) {
+        try {
+            List<RestaurantAddress> addresses = restaurantRepository.getAllRestaurantAddressesByRestaurantId(id);
+            if (addresses.size() == 0) {
+                throw new ResourceNotFoundException("Ресторана с id = " + id + " не существует.");
+            }
+            return addresses;
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<RestaurantAddress> getAllRestaurantAddressesByRestaurantName(String name) {
+        try {
+            List<RestaurantAddress> addresses = restaurantRepository
+                    .getAllRestaurantAddressesByRestaurantName(name);
+            if (addresses.size() == 0) {
+                throw new ResourceNotFoundException("Ресторана с именем '" + name + "' не существует.");
+            }
+            return addresses;
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public RestaurantAddress updateRestaurantAddressStatusByAddressId(long id, String status) {
+        try {
+            RestaurantStatus.valueOf(status);
+            restaurantRepository.updateRestaurantAddressStatusByAddressId(
+                    id, RestaurantStatus.valueOf(status));
+            return getRestaurantAddressByAddressId(id);
+        } catch (IllegalArgumentException e) {
+            String enums = enumToString(RestaurantStatus.class);
+            String message = String.format("Указан неверный статус. Возможны варианты: %s", enums);
+            throw new IllegalStatusException(message, e);
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException("Указанный адрес ресторана не найден.", e);
+        }
+    }
+
+    @Override
+    public List<RestaurantAddress> getRestaurantAddressesByRestaurantIdAndRestaurantStatus(
+            long id, String status) {
+        try {
+            RestaurantStatus.valueOf(status);
+            List<RestaurantAddress> addresses = restaurantRepository
+                    .getRestaurantAddressesByRestaurantIdAndRestaurantStatus(
+                            id, RestaurantStatus.valueOf(status));
+            if (addresses.size() == 0) {
+                throw new ResourceNotFoundException("Ресторана с id = " + id + " не существует.");
+            }
+            return addresses;
+        } catch (IllegalArgumentException e) {
+            String enums = enumToString(RestaurantStatus.class);
+            String message = String.format("Указан неверный статус. Возможны варианты: %s", enums);
+            throw new IllegalStatusException(message, e);
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException("Указанный адрес ресторана не найден.", e);
+        }
     }
 
     @Transactional
-    @Override
-    public List<RestaurantAddress> getRestaurantByRestaurantStatus(String restaurantStatus) {
-        return restaurantRepository.getRestaurantByRestaurantStatus(RestaurantStatus.valueOf(restaurantStatus));
-    }
-
     @Override
     public void createRestaurant(Restaurant restaurant) {
         restaurantRepository.save(restaurant);
     }
+
 
 }

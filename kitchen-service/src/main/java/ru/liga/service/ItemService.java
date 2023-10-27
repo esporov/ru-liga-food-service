@@ -1,25 +1,22 @@
 package ru.liga.service;
 
-import ru.liga.domain.item.Item;
 
+import ru.liga.domain.enitity.kitchenService.item.Item;
+
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 public interface ItemService {
 
-    Optional<Item> getItemByRestaurantIdAndItemId(long restaurantId, long itemId);
+    Item getItemByItemId(long itemId);
 
-    List<Item> getAllItemsByRestaurantName(String name);
+    List<Item> getAllItemsByRestaurantId(long restaurantId);
 
-    List<Item> getAllAvailableItemsByRestaurantName(String name);
+    Item updateItemPriceByItemId(long itemId, BigDecimal itemPrice);
 
-    void updateItemPriceByRestaurantNameAndItemName(String restaurantName, String itemName, int price);
+    Item createItemByRestaurantId(long restaurantId, Item item);
 
-    void updateItemByRestaurantNameAndItemName(String restaurantName, String itemName, Item item);
+    Item deleteItemByItemId(long itemId);
 
-    void updateItemStatusByRestaurantIdAndItemId(long restaurantId, long itemId);
 
-    void createItemByRestaurantName(String restaurantName, Item item);
-
-    void createItemByRestaurantId(long restaurantId, Item item);
 }

@@ -1,44 +1,62 @@
 package ru.liga.repository;
 
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantStatus;
+import ru.liga.domain.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.liga.domain.restaurant.Restaurant;
-import ru.liga.domain.restaurant.RestaurantAddress;
-import ru.liga.domain.restaurant.RestaurantStatus;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
-    Optional<Restaurant> getRestaurantByRestaurantId(long restaurantId);
+    Optional<Restaurant> getRestaurantByRestaurantId(long restaurantId)
+            throws ResourceNotFoundException;
 
-    @Query(value = "select ra from RestaurantAddress ra where ra.restaurant.restaurantId = :id")
-    List<RestaurantAddress> getAllRestaurantsByRestaurantId(@Param("id") long id);
+    @Query("select ra " +
+            "from RestaurantAddress ra " +
+            "where ra.addressId = :id")
+    Optional<RestaurantAddress> getRestaurantAddressByAddressId(@Param("id") long id)
+            throws ResourceNotFoundException;
 
-    @Query(value = "SELECT * FROM restaurants " +
-            "LEFT JOIN restaurants_restaurant_address USING (restaurant_id) " +
-            "LEFT JOIN restaurant_address USING (address_id) " +
-            "WHERE restaurant_name = :restaurantName", nativeQuery = true)
-    List<Restaurant> findAllByRestaurantName(@Param("restaurantName") String restaurantName);
+    @Query("select ra " +
+            "from RestaurantAddress ra " +
+            "where ra.restaurant.restaurantId = :id")
+    List<RestaurantAddress> getAllRestaurantAddressesByRestaurantId(@Param("id") long id)
+            throws ResourceNotFoundException;
+
+    @Query("select ra " +
+            "from RestaurantAddress ra " +
+            "where ra.restaurant.restaurantName = :name")
+    List<RestaurantAddress> getAllRestaurantAddressesByRestaurantName(@Param("name") String name)
+            throws ResourceNotFoundException;
+
+    @Query("select ra " +
+            "from RestaurantAddress ra " +
+            "where ra.restaurant.restaurantId = :id and ra.restaurantStatus = :status " +
+            "order by ra.addressId")
+    List<RestaurantAddress> getRestaurantAddressesByRestaurantIdAndRestaurantStatus(
+            @Param("id") long addressId,
+            @Param("status") RestaurantStatus restaurantStatus)
+            throws ResourceNotFoundException;
 
     @Modifying
-    @Query(value = "update RestaurantAddress ra  set ra.restaurantStatus = :restaurantStatus where ra.addressId = :addressId")
-    void updateRestaurantStatusByAddressId(@Param("addressId") long addressId,
-                                           @Param("restaurantStatus") String restaurantStatus);
-
-    @Query(value =
-            "select ra " +
-                    "from RestaurantAddress ra " +
-                    /*"left join fetch ra.restaurant r  " +*/
-                    "where ra.restaurantStatus = :restaurantStatus")
-    List<RestaurantAddress> getRestaurantByRestaurantStatus(@Param("restaurantStatus") RestaurantStatus restaurantStatus);
+    @Query("update RestaurantAddress ra  " +
+            "set ra.restaurantStatus = :restaurantStatus " +
+            "where ra.addressId = :id")
+    void updateRestaurantAddressStatusByAddressId(
+            @Param("id") long id,
+            @Param("restaurantStatus") RestaurantStatus restaurantStatus)
+            throws ResourceNotFoundException;
 
 
-    void updateByRestaurantName(String restaurantName, String newRestaurantName);
+//    void updateByRestaurantName(String restaurantName, String newRestaurantName);
 
 
 
