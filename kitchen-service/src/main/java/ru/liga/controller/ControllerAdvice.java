@@ -1,19 +1,26 @@
-package ru.liga.web.controller;
+package ru.liga.controller;
 
-import ru.liga.domain.exception.ExceptionBody;
-import ru.liga.domain.exception.IllegalStatusException;
-import ru.liga.domain.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import ru.liga.domain.exception.ExceptionBody;
+import ru.liga.domain.exception.IllegalStatusException;
+import ru.liga.domain.exception.ItemNotFoundException;
+import ru.liga.domain.exception.RestaurantNotFoundException;
 
 @RestControllerAdvice
 public class ControllerAdvice {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler(RestaurantNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionBody handleResourceNotFound(ResourceNotFoundException e) {
+    public ExceptionBody handleRestaurantNotFound(RestaurantNotFoundException e) {
+        return new ExceptionBody(e.getMessage());
+    }
+
+    @ExceptionHandler(ItemNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ExceptionBody handleItemNotFound(ItemNotFoundException e) {
         return new ExceptionBody(e.getMessage());
     }
 
