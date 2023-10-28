@@ -1,21 +1,19 @@
-package ru.liga.web.controller;
+package ru.liga.controller;
 
-import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import ru.liga.service.CourierService;
-import ru.liga.web.mapper.CoordinateMapper;
-import ru.liga.web.mapper.CourierMapper;
 import ru.liga.web.dto.delivery.CourierDto;
+import ru.liga.web.mapper.delivery.CourierMapper;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/delivery-api")
 @RequiredArgsConstructor
@@ -23,10 +21,9 @@ public class CourierController {
 
     private final CourierService courierService;
     private final CourierMapper courierMapper;
-    private final CoordinateMapper coordinateMapper;
 
-    @GetMapping("/v1.0/courier")
-    public ResponseEntity<CourierDto> getCourierByCourierId(@RequestParam("id") long courierId) {
+    @GetMapping("/v1.0/courier/id/{id}")
+    public ResponseEntity<CourierDto> getCourierByCourierId(@PathVariable("id") long courierId) {
         var courier = courierService.getCourierByCourierId(courierId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -41,11 +38,21 @@ public class CourierController {
                 .body(courierMapper.toDto(couriers));
     }
 
-    @GetMapping("/couriers")
-    public ResponseEntity<List<CourierDto>> getCouriersByCourierStatus(@RequestParam("courierStatus") String courierStatus) {
-        List<Courier> couriers = courierService.getCouriersByCourierStatus(courierStatus);
+    @GetMapping("/v1.0/couriers/status/{status}")
+    public ResponseEntity<List<CourierDto>> getCouriersByCourierStatus(@PathVariable("status") String courierStatus) {
+        List<Courier> couriers = courierService.getAllCourierByCourierStatus(courierStatus);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(courierMapper.toDto(couriers));
+    }
+
+    @PatchMapping("/v1.0/courier/id/{id}/status/{status}")
+    ResponseEntity<CourierDto> updateCourierStatusByCourierId(@PathVariable("id") long id,
+                                                           @PathVariable("status") String courierStatus) {
+        var courier = courierService.updateCourierStatusByCourierId(id, courierStatus);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(courierMapper.toDto(courier));
+
     }
 }
