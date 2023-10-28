@@ -1,6 +1,6 @@
 package ru.liga.repository;
 
-import ru.liga.domain.enitity.customerService.customer.CustomerAddress;
+import ru.liga.domain.enitity.orderService.customer.CustomerAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface CustomerAddressRepository extends JpaRepository<CustomerAddress, Long> {
-
 
     @Query("select ca " +
             "from CustomerAddress ca " +
