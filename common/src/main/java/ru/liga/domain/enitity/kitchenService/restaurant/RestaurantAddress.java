@@ -31,7 +31,7 @@ public  class RestaurantAddress {
     @Column(name = "work_status")
     private RestaurantStatus restaurantStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn (name = "restaurant_id",referencedColumnName = "restaurant_id")
     private Restaurant restaurant;
 

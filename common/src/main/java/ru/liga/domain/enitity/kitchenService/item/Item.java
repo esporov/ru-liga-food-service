@@ -1,20 +1,22 @@
 package ru.liga.domain.enitity.kitchenService.item;
 
-import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "menu_items")
-public class Item {
+public class Item implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +39,7 @@ public class Item {
     @Column(name = "item_status")
     private ItemStatus itemStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn (name = "restaurant_id",referencedColumnName = "restaurant_id")
     private Restaurant restaurant;
 

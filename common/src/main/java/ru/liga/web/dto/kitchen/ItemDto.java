@@ -1,9 +1,9 @@
 package ru.liga.web.dto.kitchen;
 
-import ru.liga.domain.enitity.kitchenService.item.ItemStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import ru.liga.domain.enitity.kitchenService.item.ItemStatus;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

@@ -1,10 +1,10 @@
 package ru.liga.domain.enitity.deliveryService.coordinate;
 
 
-import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
 
 import javax.persistence.*;
 
@@ -23,7 +23,7 @@ public class Coordinate {
 
     private float longitude;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @MapsId
     private Courier courier;
 
