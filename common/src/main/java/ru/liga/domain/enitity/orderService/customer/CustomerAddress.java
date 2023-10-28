@@ -1,4 +1,4 @@
-package ru.liga.domain.enitity.customerService.customer;
+package ru.liga.domain.enitity.orderService.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

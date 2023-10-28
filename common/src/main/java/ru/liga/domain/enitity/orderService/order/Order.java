@@ -1,7 +1,8 @@
 package ru.liga.domain.enitity.orderService.order;
 
+import lombok.Builder;
 import ru.liga.domain.enitity.deliveryService.courier.Courier;
-import ru.liga.domain.enitity.customerService.customer.Customer;
+import ru.liga.domain.enitity.orderService.customer.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "orders")
 public class Order {

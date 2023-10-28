@@ -1,8 +1,8 @@
-package ru.liga.web.mapper;
+package ru.liga.web.mapper.customer;
 
-import ru.liga.domain.enitity.customerService.customer.CustomerAddress;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
+import ru.liga.domain.enitity.orderService.customer.CustomerAddress;
 import ru.liga.web.dto.customer.CustomerAddressDto;
 import ru.liga.web.mapper.Mappable;
 
