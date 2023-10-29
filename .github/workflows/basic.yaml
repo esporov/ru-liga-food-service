@@ -1,5 +1,8 @@
 name: CI_CD
 
+env:
+  APPLICATION_NAME: "Food-Delivery-Service"
+
 on:
   push:
     branches:
@@ -14,10 +17,33 @@ jobs:
       - name: Print Hello Message
         run: echo "Hello World from Testing job"
 
+      - name: Print few commands
+        run: |
+          echo "Hello Message 1"
+          echo "Hello Message 2"
+          echo "Application name: ${{env.APPLICATION_NAME}}"
+
+      - name: List current folder
+        run: ls -la
+
+      - name: Got clone my repo
+        uses: actions/checkout@v1
+
+      - name: List current folder
+        run: ls -la
+
+
   my_deploy:
     runs-on: ubuntu-latest
-    needs: [my_testing]
+    needs: [ my_testing ]
 
     steps:
       - name: Print Hello Message
         run: echo "Hello World from Deploy job"
+
+      - name: Test some packages
+        run: aws --version
+
+      - name: Test some packages
+        run: zip
+
