@@ -1,0 +1,22 @@
+name: CI_CD
+
+on:
+  push:
+    branches:
+      - main
+      - hometask-7
+
+jobs:
+  my_testing:
+    runs-on: ubuntu_latest
+
+    steps:
+      - name: Print Hello Message
+        run: echo "Hello World from Testing job"
+
+  my_deploy:
+    runs-on: ubuntu_latest
+
+    steps:
+      - name: Print Hello Message
+        run: echo "Hello World from Deploy job"
