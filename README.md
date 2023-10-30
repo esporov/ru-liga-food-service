@@ -2,4 +2,4 @@
 
 ## Database diagram
 
-![Database diagram](https://github.com//esporov/ru-liga-food-service/docs/Database_diagram.png)
+![Database diagram](https://github.com//esporov/ru-liga-food-service/blob/main/docs/Database_diagram.png)
