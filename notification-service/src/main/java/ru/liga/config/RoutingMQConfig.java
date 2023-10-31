@@ -7,19 +7,27 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 public class RoutingMQConfig {
     @Bean
     public Declarables myBaseQueue() {
+        //задаем время в 10 минут, через которое сообщение удалится из очереди при неудачной попытки прочтения сообщения
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("x-message-ttl", 600000);
+
         Queue queueDirectFirst = new Queue("kitchen", false, false, false);
-        Queue queueDirectSecond = new Queue("delivery", false);
+        Queue queueDirectSecond = new Queue("delivery", false, false, false,args);
         DirectExchange directExchange = new DirectExchange("KitchenDeliveryExchange");
         return new Declarables(queueDirectFirst, queueDirectSecond, directExchange,
                 BindingBuilder
                         .bind(queueDirectFirst)
                         .to(directExchange)
                         .with("kitchen"),
-                BindingBuilder.bind(queueDirectSecond)
+                BindingBuilder
+                        .bind(queueDirectSecond)
                         .to(directExchange)
                         .with("delivery"));
     }
