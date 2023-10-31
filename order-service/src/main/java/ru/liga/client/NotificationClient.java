@@ -15,5 +15,5 @@ public interface NotificationClient {
 
     @PostMapping("/kitchenDelivery")
     OrderWrapper<OrderDto, OrderItemDto> sendMessage(@RequestBody OrderWrapper<OrderDto, OrderItemDto> order,
-                         @RequestParam("routingKey") String routingKey);
+                                                     @RequestParam("routingKey") String routingKey);
 }

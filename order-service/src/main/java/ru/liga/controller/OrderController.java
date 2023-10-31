@@ -52,7 +52,7 @@ public class OrderController {
         fullOrderDto.setOrder(orderMapper.toDto(fullOrder.getOrder()));
         fullOrderDto.setItems(orderItemMapper.toDto(fullOrder.getItems()));
 
-        notificationClient.sendMessage(fullOrderDto, "kitchen");
+        notificationClient.sendMessage(fullOrderDto, "delivery");
 
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
