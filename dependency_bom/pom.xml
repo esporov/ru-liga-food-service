@@ -27,11 +27,12 @@
         <swagger-annotations.version>2.2.4</swagger-annotations.version>
         <springdoc-openapi-common.version>1.6.6</springdoc-openapi-common.version>
         <springdoc-openapi-webmvc-core.version>1.6.6</springdoc-openapi-webmvc-core.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <spring-cloud.version>2021.0.8</spring-cloud.version>
         <snakeyaml.version>2.2</snakeyaml.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.complier.plugin>3.11.0</maven.complier.plugin>
+        <spring-cloud.version>2021.0.8</spring-cloud.version>
     </properties>
 
     <build>
@@ -184,6 +185,14 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-test</artifactId>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
