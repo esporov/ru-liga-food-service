@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8085
 
 spring:
   cloud:
@@ -52,7 +52,7 @@ spring:
             client-secret: secret
             # Тип предоставления авторизации (авторизационный код = authorization_code)
             authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://127.0.0.1:8085/login/oauth2/code/{registrationId}"
             #  Запрашиваемые scope
             scope: openid,message.read
         provider:
