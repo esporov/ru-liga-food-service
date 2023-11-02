@@ -49,7 +49,7 @@ public class OrderListenerImpl implements OrderListener {
 
     //Вызываем каждую минуту для проверки свободных курьеров
     @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
-    private void enableListeningAfterDelay() {
+    void enableListeningAfterDelay() {
         if (!isListeningEnabled) {
             isListeningEnabled = true;
         }
