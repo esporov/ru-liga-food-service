@@ -1,14 +1,22 @@
 package ru.liga.web.dto.kitchen;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantStatus;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantStatus;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-@Data
+import java.util.Objects;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestaurantAddressDto {
 
     @NotNull(message = "Название улицы должно быть заполнено.")
@@ -25,4 +33,36 @@ public class RestaurantAddressDto {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfAdd;
+
+    @Override
+    public String toString() {
+        return "RestaurantAddressDto{" +
+                "streetName='" + streetName + '\'' +
+                ", city='" + city + '\'' +
+                ", restaurantStatus=" + restaurantStatus +
+                ", dateOfAdd=" + dateOfAdd +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RestaurantAddressDto that = (RestaurantAddressDto) o;
+
+        if (!Objects.equals(streetName, that.streetName)) return false;
+        if (!Objects.equals(city, that.city)) return false;
+        if (restaurantStatus != that.restaurantStatus) return false;
+        return Objects.equals(dateOfAdd, that.dateOfAdd);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = streetName != null ? streetName.hashCode() : 0;
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (restaurantStatus != null ? restaurantStatus.hashCode() : 0);
+        result = 31 * result + (dateOfAdd != null ? dateOfAdd.hashCode() : 0);
+        return result;
+    }
 }

@@ -1,32 +1,29 @@
 package ru.liga.service.impl;
 
-import ru.liga.domain.enitity.deliveryService.courier.Courier;
-import ru.liga.domain.enitity.deliveryService.courier.CourierStatus;
-import ru.liga.domain.exception.IllegalStatusException;
-import ru.liga.domain.exception.ResourceNotFoundException;
-import ru.liga.interfaces.EnumToStringConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.liga.service.CourierService;
+import ru.liga.domain.enitity.deliveryService.courier.Courier;
+import ru.liga.domain.enitity.deliveryService.courier.CourierStatus;
+import ru.liga.domain.exception.CourierNotFoundException;
+import ru.liga.domain.exception.IllegalStatusException;
+import ru.liga.interfaces.IllegalStatusExceptionMessage;
 import ru.liga.repository.CourierRepository;
+import ru.liga.service.CourierService;
+
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class CourierServiceImpl implements CourierService, EnumToStringConverter {
+public class CourierServiceImpl implements CourierService, IllegalStatusExceptionMessage {
 
     private final CourierRepository courierRepository;
 
     @Override
     public Courier getCourierByCourierId(long id) {
-        try {
-            return courierRepository.getCourierByCourierId(id)
-                    .orElseThrow(()->new ResourceNotFoundException("Курьера с id = " + id + " не существует."));
-        } catch (ResourceNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        return courierRepository.findById(id)
+                .orElseThrow(() -> new CourierNotFoundException("Курьера с id = " + id + " не существует."));
     }
 
     @Override
@@ -35,14 +32,30 @@ public class CourierServiceImpl implements CourierService, EnumToStringConverter
     }
 
     @Override
-    public List<Courier> getCouriersByCourierStatus(String courierStatus) {
+    public List<Courier> getAllCourierByCourierStatus(String courierStatus) {
         try {
-            CourierStatus status = CourierStatus.valueOf(courierStatus);
-            return courierRepository.getCouriersByCourierStatus(status);
+            CourierStatus validStatus = CourierStatus.valueOf(courierStatus);
+            List<Courier> couriers = courierRepository.getCouriersByCourierStatus(validStatus);
+            if (couriers.size() == 0) {
+                throw new CourierNotFoundException("Курьеров с указанным статусом = " + courierStatus + " не найдено.");
+            }
+            return couriers;
         } catch (IllegalArgumentException e) {
-            String enums = enumToString(CourierStatus.class);
-            String message = String.format("Указан неверный статус. Возможны варианты: %s", enums);
-            throw new IllegalStatusException(message, e);
+            throw new IllegalStatusException(exceptionMessage(CourierStatus.class), e);
+        }
+    }
+
+    @Transactional
+    @Override
+    public Courier updateCourierStatusByCourierId(long id, String courierStatus) {
+        try {
+            CourierStatus validStatus = CourierStatus.valueOf(courierStatus);
+            var courier = getCourierByCourierId(id);
+            courierRepository.updateCourierStatusByCourierId(id, validStatus);
+            courier.setCourierStatus(validStatus);
+            return courier;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStatusException(exceptionMessage(CourierStatus.class), e);
         }
     }
 }

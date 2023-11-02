@@ -1,15 +1,16 @@
 package ru.liga;
 
-import ru.liga.domain.enitity.deliveryService.coordinate.Coordinate;
-import ru.liga.domain.enitity.deliveryService.courier.Courier;
+import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import ru.liga.config.CommonConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EntityScan(basePackageClasses = {Courier.class, Coordinate.class})
+@Import(value = {CommonConfig.class})
+@EnableScheduling
 public class DeliveryServiceApp {
 
     public static void main(String[] args) {

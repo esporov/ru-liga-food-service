@@ -1,0 +1,60 @@
+server:
+  port: 8085
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: delivery-service
+          uri: http://127.0.0.1:8080 # стучимся в delivery-service
+          predicates:
+            - Path=/delivery-api/**
+          filters:
+            # Этот фильтр используется для передачи токена аутентификации через данный API-шлюз
+            # от входящего запроса к исходящему запросу.
+            - TokenRelay=
+            # Этот фильтр используется для удаления заголовка 'Cookie' из входящего HTTP-запроса
+            # перед его перенаправлением на внутренний сервис.
+            # Это нужно, чтобы другие сервисы не видели или не использовали куки клиента (опционально)
+            - RemoveRequestHeader=Cookie
+        - id: kitchen-service
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/restaurant-api/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+        - id: notification-service
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/notification-service/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+        - id: order-service
+          uri: http://127.0.0.1:8083
+          predicates:
+            - Path=/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            # Поставщик аутентификации, типа keycloak, spring и т.д.
+            provider: spring
+            # Идентификатор клиента
+            client-id: gateway
+            # Секрет клиента
+            client-secret: secret
+            # Тип предоставления авторизации (авторизационный код = authorization_code)
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8085/login/oauth2/code/{registrationId}"
+            #  Запрашиваемые scope
+            scope: openid,message.read
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
