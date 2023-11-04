@@ -1,5 +1,7 @@
 package ru.liga.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import ru.liga.web.mapper.kitchen.ItemMapper;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Tag(name = "Item Controller")
 @RestController
 @RequestMapping("/restaurant-api")
 @RequiredArgsConstructor
@@ -29,6 +32,7 @@ public class ItemController {
                 .body(itemMapper.toDto(item));
     }
 
+    @Hidden
     @GetMapping("/v1.0/itemFeign/id/{id}")
     public ResponseEntity<Item> getItemByItemIdForFeign(@PathVariable("id") long itemId) {
         var item = itemService.getItemByItemId(itemId);

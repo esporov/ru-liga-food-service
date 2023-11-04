@@ -11,11 +11,9 @@ public class OAuth2ResourceServerSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .mvcMatcher("/**")
-                .authorizeRequests()
-                .mvcMatchers("/**")
-                .access("hasAuthority('SCOPE_message.read')")
-                .and()
+                .authorizeRequests(conf -> {
+                    conf.anyRequest().authenticated();
+                })
                 .oauth2ResourceServer()
                 .jwt();
         return http.build();
