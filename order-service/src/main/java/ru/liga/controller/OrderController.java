@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.liga.client.NotificationClient;
 import ru.liga.domain.enitity.orderService.order.Order;
 import ru.liga.domain.enitity.orderService.orderItem.OrderItem;
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 import ru.liga.service.OrderService;
 import ru.liga.web.dto.customer.CustomerOrderDto;
 import ru.liga.web.dto.order.OrderDto;

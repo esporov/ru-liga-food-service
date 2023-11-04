@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 import ru.liga.web.dto.order.OrderDto;
 import ru.liga.web.dto.order.OrderItemDto;
 

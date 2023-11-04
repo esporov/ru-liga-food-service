@@ -7,7 +7,7 @@ import ru.liga.domain.enitity.deliveryService.courier.Courier;
 import ru.liga.domain.enitity.deliveryService.courier.CourierStatus;
 import ru.liga.domain.exception.CourierNotFoundException;
 import ru.liga.domain.exception.IllegalStatusException;
-import ru.liga.interfaces.IllegalStatusExceptionMessage;
+import ru.liga.util.IllegalStatusExceptionMessage;
 import ru.liga.repository.CourierRepository;
 import ru.liga.service.CourierService;
 

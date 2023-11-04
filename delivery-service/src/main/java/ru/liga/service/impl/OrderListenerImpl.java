@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.liga.domain.enitity.deliveryService.courier.CourierStatus;
 import ru.liga.domain.exception.CourierNotFoundException;
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 import ru.liga.service.CourierService;
 import ru.liga.service.OrderListener;
 import ru.liga.web.dto.order.OrderDto;

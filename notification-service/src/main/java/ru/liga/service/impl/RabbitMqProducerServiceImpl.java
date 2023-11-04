@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 import ru.liga.service.RabbitMqProducerService;
 import ru.liga.web.dto.order.OrderDto;
 import ru.liga.web.dto.order.OrderItemDto;

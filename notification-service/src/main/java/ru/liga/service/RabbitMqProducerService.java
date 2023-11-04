@@ -1,6 +1,6 @@
 package ru.liga.service;
 
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 import ru.liga.web.dto.order.OrderDto;
 import ru.liga.web.dto.order.OrderItemDto;
 

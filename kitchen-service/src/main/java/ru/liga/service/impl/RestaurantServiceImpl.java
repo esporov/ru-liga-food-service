@@ -11,7 +11,7 @@ import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
 import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantStatus;
 import ru.liga.domain.exception.IllegalStatusException;
 import ru.liga.domain.exception.RestaurantNotFoundException;
-import ru.liga.interfaces.IllegalStatusExceptionMessage;
+import ru.liga.util.IllegalStatusExceptionMessage;
 import ru.liga.repository.RestaurantAddressRepository;
 import ru.liga.repository.RestaurantRepository;
 import ru.liga.service.RestaurantService;

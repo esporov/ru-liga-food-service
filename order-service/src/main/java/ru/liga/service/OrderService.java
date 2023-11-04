@@ -2,7 +2,7 @@ package ru.liga.service;
 
 import ru.liga.domain.enitity.orderService.order.Order;
 import ru.liga.domain.enitity.orderService.orderItem.OrderItem;
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 
 import java.util.List;
 

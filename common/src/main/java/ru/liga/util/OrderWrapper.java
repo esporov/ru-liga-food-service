@@ -1,4 +1,4 @@
-package ru.liga.interfaces;
+package ru.liga.util;
 
 import lombok.*;
 

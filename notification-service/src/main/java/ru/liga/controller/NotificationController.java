@@ -2,7 +2,7 @@ package ru.liga.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.liga.interfaces.OrderWrapper;
+import ru.liga.util.OrderWrapper;
 import ru.liga.service.RabbitMqProducerService;
 import ru.liga.web.dto.order.OrderDto;
 import ru.liga.web.dto.order.OrderItemDto;
