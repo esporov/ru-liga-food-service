@@ -9,6 +9,8 @@ public interface RestaurantService {
 
     Restaurant getRestaurantByRestaurantId(long id);
 
+    Restaurant getRestaurantByRestaurantName(String name);
+
     RestaurantAddress getRestaurantAddressByAddressId(long id);
 
     List<Restaurant> getAllRestaurants();

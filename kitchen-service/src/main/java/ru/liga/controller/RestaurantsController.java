@@ -158,8 +158,7 @@ public class RestaurantsController {
                                     schema = @Schema(implementation = ExceptionBody.class)))
             })
     @PostMapping("/v1.0/restaurant")
-    public ResponseEntity<RestaurantDto> createRestaurant(@Validated @RequestBody RestaurantDto restaurant,
-                                                          @Validated @RequestBody RestaurantAddressDto addressDto) {
+    public ResponseEntity<RestaurantDto> createRestaurant(@Validated @RequestBody RestaurantDto restaurant) {
         var newRestaurant = restaurantService.createRestaurant(restaurantMapper.toEntity(restaurant));
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)

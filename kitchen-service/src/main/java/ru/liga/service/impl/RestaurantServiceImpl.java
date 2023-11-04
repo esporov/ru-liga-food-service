@@ -35,6 +35,12 @@ public class RestaurantServiceImpl implements RestaurantService, IllegalStatusEx
     }
 
     @Override
+    public Restaurant getRestaurantByRestaurantName(String name) {
+        return restaurantRepository.findRestaurantByRestaurantName(name)
+                .orElseThrow(() -> new RestaurantNotFoundException("Ресторана с название = " + name + " не существует."));
+    }
+
+    @Override
     public RestaurantAddress getRestaurantAddressByAddressId(long id) {
         return restaurantAddressRepository.findById(id)
                 .orElseThrow(() -> new RestaurantNotFoundException(
@@ -96,6 +102,7 @@ public class RestaurantServiceImpl implements RestaurantService, IllegalStatusEx
     @Transactional
     @Override
     public Restaurant createRestaurant(Restaurant restaurant) {
+        getRestaurantByRestaurantName(restaurant.getRestaurantName());
         return restaurantRepository.save(restaurant);
     }
 
