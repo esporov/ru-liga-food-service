@@ -19,11 +19,13 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.OAuth2TokenFormat;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -33,6 +35,8 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -42,14 +46,12 @@ import java.util.UUID;
 @Configuration
 @EnableWebSecurity
 public class OAuth2AuthServerSecurityConfiguration {
-
     @Bean
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(
-                                new LoginUrlAuthenticationEntryPoint("/login"))
-                );
+                                new LoginUrlAuthenticationEntryPoint("/login")));
         return http.build();
     }
 
@@ -57,7 +59,9 @@ public class OAuth2AuthServerSecurityConfiguration {
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable().authorizeHttpRequests()
+
+                .csrf().disable()
+                .authorizeHttpRequests()
                 .antMatchers("/register").permitAll()
                 .and()
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
@@ -74,9 +78,14 @@ public class OAuth2AuthServerSecurityConfiguration {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/gateway")
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+                        .accessTokenTimeToLive(Duration.of(30, ChronoUnit.MINUTES))
+                        .refreshTokenTimeToLive(Duration.of(120,ChronoUnit.MINUTES))
+                        .reuseRefreshTokens(false)
+                        .build())
+                .redirectUri("http://127.0.0.1:8085/login/oauth2/code/gateway")
                 .scope(OidcScopes.OPENID)
-                .scope("message.read")
                 .build();
 
         JdbcRegisteredClientRepository registeredClientRepository =
@@ -136,5 +145,4 @@ public class OAuth2AuthServerSecurityConfiguration {
     public PasswordEncoder defaultPasswordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
 }
