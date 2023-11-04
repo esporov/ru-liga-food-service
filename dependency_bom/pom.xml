@@ -17,24 +17,25 @@
     <properties>
         <commom.version>0.0.1-SNAPSHOT</commom.version>
         <java.version>11</java.version>
-        <spring.version>2.7.15</spring.version>
-        <mybatis.version>3.5.6</mybatis.version>
-        <lombok.version>1.18.30</lombok.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <postgres.version>42.3.8</postgres.version>
         <liquibase.version>4.11.0</liquibase.version>
-        <swagger-annotations.version>2.2.4</swagger-annotations.version>
-        <springdoc-openapi-common.version>1.6.6</springdoc-openapi-common.version>
-        <springdoc-openapi-webmvc-core.version>1.6.6</springdoc-openapi-webmvc-core.version>
-        <spring-cloud.version>2021.0.8</spring-cloud.version>
-        <snakeyaml.version>2.2</snakeyaml.version>
+        <logback-classic.version>1.4.11</logback-classic.version>
+        <lombok.version>1.18.30</lombok.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.complier.plugin>3.11.0</maven.complier.plugin>
+        <mybatis.version>3.5.6</mybatis.version>
+        <slf4j-api.version>2.0.9</slf4j-api.version>
+        <postgres.version>42.3.8</postgres.version>
+        <spring.version>2.7.15</spring.version>
+        <springdoc-openapi.version>1.6.5</springdoc-openapi.version>
         <spring-cloud.version>2021.0.8</spring-cloud.version>
         <spring-security-oauth2-authorization-server.version>0.3.0</spring-security-oauth2-authorization-server.version>
         <spring-session-core.version>2.7.4</spring-session-core.version>
+        <springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
+        <swagger-annotations.version>2.2.4</swagger-annotations.version>
     </properties>
 
     <build>
@@ -55,6 +56,7 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--   Внутренние зависимости -->
             <dependency>
                 <groupId>ru.liga</groupId>
                 <artifactId>common</artifactId>
@@ -62,30 +64,20 @@
                 <type>jar</type>
             </dependency>
 
+            <!--   Swagger зависимости -->
             <dependency>
-                <groupId>org.springframework.session</groupId>
-                <artifactId>spring-session-core</artifactId>
-                <version>${spring-session-core.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-oauth2-authorization-server</artifactId>
-                <version>${spring-security-oauth2-authorization-server.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-webflux-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>${snakeyaml.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
+            <!--   Spring базовые зависимости -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
@@ -101,24 +93,6 @@
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-amqp</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
@@ -129,26 +103,45 @@
                 <version>${spring.version}</version>
             </dependency>
 
-
+            <!--   Spring Security зависимости -->
             <dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>${swagger-annotations.version}</version>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-core</artifactId>
+                <version>${spring-session-core.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-common</artifactId>
-                <version>${springdoc-openapi-common.version}</version>
-                <scope>compile</scope>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${spring-security-oauth2-authorization-server.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-webmvc-core</artifactId>
-                <version>${springdoc-openapi-webmvc-core.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+                <version>${spring.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--   Зависимости инструментов работы с БД -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -161,6 +154,7 @@
                 <artifactId>liquibase-core</artifactId>
                 <version>${liquibase.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
@@ -168,21 +162,7 @@
                 <scope>runtime</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <optional>true</optional>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring.version}</version>
-                <scope>test</scope>
-            </dependency>
-
+            <!--   Зависимости инструментов работы с моделями -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
@@ -195,18 +175,39 @@
                 <version>${mapstruct.version}</version>
             </dependency>
 
+            <!--   Зависимости асинхронного взаимодействия -->
             <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-rabbit-test</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!--   Зависимости утилитарные -->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!--   Зависимости инструментов тестирования -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.version}</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit-test</artifactId>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
