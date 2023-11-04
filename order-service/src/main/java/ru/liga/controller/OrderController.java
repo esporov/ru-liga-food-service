@@ -20,7 +20,7 @@ import ru.liga.web.mapper.order.OrderMapper;
 import java.util.List;
 
 @RestController
-@RequestMapping("/order-api")
+@RequestMapping("/order-service/order-api")
 @RequiredArgsConstructor
 public class OrderController {
 

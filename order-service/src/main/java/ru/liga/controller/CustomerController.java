@@ -11,7 +11,7 @@ import ru.liga.web.mapper.customer.CustomerMapper;
 
 
 @RestController
-@RequestMapping("/customer-api")
+@RequestMapping("/order-service/customer-api")
 @RequiredArgsConstructor
 public class CustomerController {
 

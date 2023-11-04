@@ -42,7 +42,7 @@ spring:
         - id: order-service
           uri: http://127.0.0.1:8083/
           predicates:
-            - Path=/**
+            - Path=/order-service/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
