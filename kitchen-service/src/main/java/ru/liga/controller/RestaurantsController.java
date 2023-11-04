@@ -142,6 +142,7 @@ public class RestaurantsController {
     public ResponseEntity<RestaurantAddressDto> updateRestaurantAddressStatusByAddressId(
             @RequestParam(value = "restaurantId") long id,
             @RequestParam(value = "newStatus") String restaurantStatus) {
+        LOGGER.info("Пробуем обновить статус на {}, для адреса по id = {}", restaurantStatus, id);
         RestaurantAddress address = restaurantService.updateRestaurantAddressStatusByAddressId(id, restaurantStatus);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)

@@ -8,6 +8,6 @@ public interface IllegalStatusExceptionMessage {
         String enums = Stream.of(e.getEnumConstants())
                 .map(Enum::name)
                 .collect(Collectors.joining(", ", "", "."));
-        return String.format("Указан неверный статус. Возможны варианты: %s", enums);
+        return String.format("Указан неверный статус. Возможны варианты: %s Операция прервана.", enums);
     }
 }
