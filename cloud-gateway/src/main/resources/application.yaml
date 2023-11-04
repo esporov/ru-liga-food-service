@@ -1,12 +1,17 @@
 server:
   port: 8085
+  forward-headers-strategy: framework
+
+springdoc:
+  swagger-ui:
+    path: /
 
 spring:
   cloud:
     gateway:
       routes:
         - id: delivery-service
-          uri: http://127.0.0.1:8080 # стучимся в delivery-service
+          uri: http://127.0.0.1:8080/ # стучимся в delivery-service
           predicates:
             - Path=/delivery-api/**
           filters:
@@ -17,22 +22,25 @@ spring:
             # перед его перенаправлением на внутренний сервис.
             # Это нужно, чтобы другие сервисы не видели или не использовали куки клиента (опционально)
             - RemoveRequestHeader=Cookie
+
         - id: kitchen-service
-          uri: http://127.0.0.1:8081
+          uri: http://127.0.0.1:8081/
           predicates:
             - Path=/restaurant-api/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
+
         - id: notification-service
-          uri: http://127.0.0.1:8082
+          uri: http://127.0.0.1:8082/
           predicates:
             - Path=/notification-service/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
+
         - id: order-service
-          uri: http://127.0.0.1:8083
+          uri: http://127.0.0.1:8083/
           predicates:
             - Path=/**
           filters:
@@ -54,7 +62,9 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "http://127.0.0.1:8085/login/oauth2/code/{registrationId}"
             #  Запрашиваемые scope
-            scope: openid,message.read
+            scope: openid
+#            scope: openid, message.read
+#            scope: openid, message.read, message.write
         provider:
           spring:
             issuer-uri: http://localhost:9000
