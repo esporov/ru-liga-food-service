@@ -1,5 +1,6 @@
 package ru.liga.domain.enitity.kitchenService.item;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.*;
 import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Builder
 @Getter
 @Setter
+@Hidden
 public class Item implements Serializable {
 
     @Id

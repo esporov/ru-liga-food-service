@@ -10,14 +10,14 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@Schema(description = "Restaurant DTO")
+@Schema(title = "Restaurant", description = "Ресторан")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestaurantDto {
 
-    @Schema(description = "Restaurant name", example = "БургерКвин")
+    @Schema(description = "Название ресторана", example = "БургерКвин")
     @NotNull
     @Length(max = 255, message = "Название должно быть не более 255 символов.")
     private String restaurantName;

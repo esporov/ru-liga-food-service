@@ -12,21 +12,24 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.Objects;
 
-@Schema(description = "Item DTO")
+@Schema(title = "Item", description = "Позиция меню")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemDto {
 
+    @Schema(description = "Название позиции меню", example = "Чизбургер")
     @NotNull(message = "Название позиции должно быть заполнено.")
     @Length(max = 255, message = "Название должно быть не более 255 символов.")
     private String itemName;
 
+    @Schema(description = "Цена", example = "69")
     @NotNull(message = "Цена должна быть указана.")
     @Positive(message = "Цена должна быть больше нуля.")
     private int itemPrice;
 
+    @Schema(description = "Стоп лист позиции", example = "AVAILABLE")
     @NotNull(message = "Необходимо указать находится ли позиция в стоп-листе.")
     private ItemStatus itemStatus;
 

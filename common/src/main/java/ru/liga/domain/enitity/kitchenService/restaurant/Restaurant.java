@@ -1,5 +1,6 @@
 package ru.liga.domain.enitity.kitchenService.restaurant;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+@Hidden
 public class Restaurant {
 
     @Id
