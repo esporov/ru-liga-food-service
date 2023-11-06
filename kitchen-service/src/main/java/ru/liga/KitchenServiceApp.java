@@ -1,10 +1,10 @@
 package ru.liga;
 
-import org.springframework.context.annotation.Import;
-import ru.liga.config.CommonConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ru.liga.config.CommonConfig;
 
 @SpringBootApplication
 @EnableTransactionManagement

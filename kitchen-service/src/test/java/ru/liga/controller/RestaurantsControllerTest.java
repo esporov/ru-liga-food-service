@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
@@ -24,6 +26,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class RestaurantsControllerTest {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(RestaurantsControllerTest.class);
 
     @Mock
     RestaurantService restaurantService;
@@ -56,8 +60,12 @@ class RestaurantsControllerTest {
 
         //then
         assertNotNull(responseEntity);
+        LOGGER.debug("Проверка на NotNul пройдена");
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        LOGGER.debug("Проверка на HTTP OK пройдена");
         assertEquals(MediaType.APPLICATION_JSON, responseEntity.getHeaders().getContentType());
+        LOGGER.debug("Проверка на MediaType пройдена");
         assertEquals(addressDto,responseEntity.getBody());
+        LOGGER.debug("Проверка на ResponseBody пройдена");
     }
 }
