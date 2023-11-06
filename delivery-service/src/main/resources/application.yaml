@@ -9,6 +9,23 @@ management:
 server:
   port: 8080
 
+logging:
+  level:
+    ru.liga: DEBUG
+  pattern:
+    console: '%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint}
+            %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint}
+            %clr([%15.15t] [processId-%X{processId}]){faint} %clr(%-40.40logger{39}){cyan}
+            %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}'
+
+springdoc:
+  swagger-ui:
+    path: /delivery-api/swagger-ui.html
+    default-model-expand-depth: -1
+  api-docs:
+    path: /delivery-api/v3/api-docs
+  override-with-generic-response: false
+
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -22,3 +39,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
         default_batch_fetch_size: 50
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000

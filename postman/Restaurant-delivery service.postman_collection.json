@@ -1,0 +1,552 @@
+{
+	"info": {
+		"_postman_id": "3529563e-6b5e-4b58-8eef-13425d20db52",
+		"name": "Restaurant-delivery service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27058736",
+		"_collection_link": "https://orange-capsule-46813.postman.co/workspace/New-Team-Workspace~7d424d76-27d2-49d4-be35-cc6af0383df2/collection/27058736-3529563e-6b5e-4b58-8eef-13425d20db52?action=share&source=collection_link&creator=27058736"
+	},
+	"item": [
+		{
+			"name": "Restaurant Service",
+			"item": [
+				{
+					"name": "Ресторан",
+					"item": [
+						{
+							"name": "Все рестораны",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/restaurants",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"restaurants"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ресторан по id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/restaurant/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"restaurant",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Все адреса по id ресторана",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/addresses/restaurantId/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"addresses",
+										"restaurantId",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Все адреса по названию ресторана",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/addresses/restaurantName/Мак",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"addresses",
+										"restaurantName",
+										"Мак"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Все адреса по id ресторана и статусу",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/addresses?restaurantId=1&status=ACTIVE",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"addresses"
+									],
+									"query": [
+										{
+											"key": "restaurantId",
+											"value": "1"
+										},
+										{
+											"key": "status",
+											"value": "ACTIVE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновить статус адреса по id адреса",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/address/updateStatus?restaurantId=1&newStatus=INACTIVE",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"address",
+										"updateStatus"
+									],
+									"query": [
+										{
+											"key": "restaurantId",
+											"value": "1"
+										},
+										{
+											"key": "newStatus",
+											"value": "INACTIVE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создать новый ресторан",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"restaurantName\": \"Блаблабла\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/restaurant/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"restaurant",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создать новый адрес для ресторана по ид",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"streetName\": \"Блаблабла\",\r\n    \"city\": \"Нижний Нвогород\",\r\n    \"restaurantStatus\": \"ACTIVE\",\r\n    \"dateOfAdd\": \"2022-05-11\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/restaurant/id/1/address/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"restaurant",
+										"id",
+										"1",
+										"address",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Меню",
+					"item": [
+						{
+							"name": "Позиция по ид",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/item/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"item",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Позиция по ид (не дто)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/itemFeign/id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"itemFeign",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Меню по ид ресторана",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/restaurant/id/1/items",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"restaurant",
+										"id",
+										"1",
+										"items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Обновить цену по ид позиции",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/item/id/1/updatePrice/1570",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"item",
+										"id",
+										"1",
+										"updatePrice",
+										"1570"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создать позицию по ид ресторана",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/restaurant/id/1/item/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"restaurant",
+										"id",
+										"1",
+										"item",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить позицию по ид",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/restaurant-api/v1.0/item/id/1/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"restaurant-api",
+										"v1.0",
+										"item",
+										"id",
+										"1",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "OrderService",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"itemId\": 1,\r\n        \"quantity\":2\r\n    },\r\n    {\r\n        \"itemId\": 2,\r\n        \"quantity\":2\r\n    },\r\n    {\r\n        \"itemId\": 3,\r\n        \"quantity\":3\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/order-api/v1.0/order?customerId=1&restaurantId=1&typeOfDelivery=SELF_DELIVERY",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"order-api",
+								"v1.0",
+								"order"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "1"
+								},
+								{
+									"key": "restaurantId",
+									"value": "1"
+								},
+								{
+									"key": "typeOfDelivery",
+									"value": "SELF_DELIVERY"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courier Service",
+			"item": [
+				{
+					"name": "Курьер по id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/delivery-api/v1.0/courier/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery-api",
+								"v1.0",
+								"courier",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Курьер по статусу",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/delivery-api/v1.0/couriers/status/PICKED_UP_THE_ORDER",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery-api",
+								"v1.0",
+								"couriers",
+								"status",
+								"PICKED_UP_THE_ORDER"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Все курьеры",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/delivery-api/v1.0/couriers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery-api",
+								"v1.0",
+								"couriers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить статус у курьера",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/delivery-api/v1.0/courier/id/1/status/FIRED",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"delivery-api",
+								"v1.0",
+								"courier",
+								"id",
+								"1",
+								"status",
+								"FIRED"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

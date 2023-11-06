@@ -1,6 +1,5 @@
 package ru.liga.service;
 
-
 import ru.liga.domain.enitity.kitchenService.restaurant.Restaurant;
 import ru.liga.domain.enitity.kitchenService.restaurant.RestaurantAddress;
 
@@ -10,6 +9,8 @@ public interface RestaurantService {
 
     Restaurant getRestaurantByRestaurantId(long id);
 
+    Restaurant getRestaurantByRestaurantName(String name);
+
     RestaurantAddress getRestaurantAddressByAddressId(long id);
 
     List<Restaurant> getAllRestaurants();
@@ -18,10 +19,12 @@ public interface RestaurantService {
 
     List<RestaurantAddress> getAllRestaurantAddressesByRestaurantName(String restaurantName);
 
-    List<RestaurantAddress> getRestaurantAddressesByRestaurantIdAndRestaurantStatus(long restaurantId, String restaurantStatus);
+    List<RestaurantAddress> getAllRestaurantAddressByRestaurantIdAndRestaurantStatus(long restaurantId,
+                                                                                     String restaurantStatus);
 
     RestaurantAddress updateRestaurantAddressStatusByAddressId(long addressId, String restaurantStatus);
 
+    Restaurant createRestaurant(Restaurant restaurant);
 
-    void createRestaurant(Restaurant restaurant);
+    RestaurantAddress createRestaurantAddressByRestaurantId(long restaurantId, RestaurantAddress address);
 }

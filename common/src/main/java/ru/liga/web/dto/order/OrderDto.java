@@ -1,24 +1,50 @@
 package ru.liga.web.dto.order;
 
-import ru.liga.domain.enitity.orderService.order.OrderStatus;
+import lombok.*;
 import ru.liga.domain.enitity.orderService.order.TypeOfDelivery;
-import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Objects;
 
-@Data
-public class OrderDto {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderDto implements Serializable {
 
     private long restaurantId;
 
     private TypeOfDelivery typeOfDelivery;
 
-    private OrderStatus orderStatus;
-
     private BigDecimal orderPrice;
 
-    private Date createDate;
+    @Override
+    public String toString() {
+        return "OrderDto{" +
+                "restaurantId=" + restaurantId +
+                ", typeOfDelivery=" + typeOfDelivery +
+                ", orderPrice=" + orderPrice +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        OrderDto orderDto = (OrderDto) o;
+
+        if (restaurantId != orderDto.restaurantId) return false;
+        if (typeOfDelivery != orderDto.typeOfDelivery) return false;
+        return Objects.equals(orderPrice, orderDto.orderPrice);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (restaurantId ^ (restaurantId >>> 32));
+        result = 31 * result + (typeOfDelivery != null ? typeOfDelivery.hashCode() : 0);
+        result = 31 * result + (orderPrice != null ? orderPrice.hashCode() : 0);
+        return result;
+    }
 }
